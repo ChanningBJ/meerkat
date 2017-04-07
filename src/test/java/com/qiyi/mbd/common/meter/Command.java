@@ -1,0 +1,62 @@
+package com.qiyi.mbd.common.meter;
+
+import com.google.common.base.Optional;
+import com.qiyi.mbd.common.meter.fusing.FusingCommand;
+import com.qiyi.mbd.common.meter.fusing.FusingConfig;
+import com.qiyi.mbd.common.meter.fusing.FusingMeter;
+
+import static com.qiyi.mbd.common.meter.Command.STATUS.FUSING;
+import static com.qiyi.mbd.common.meter.Command.STATUS.NORMAL_FAILURE;
+import static com.qiyi.mbd.common.meter.Command.STATUS.NORMAL_SUCCESS;
+
+/**
+ * 请求成功返回1,请求失败返回2,熔断状态返回3
+ */
+public class Command extends FusingCommand<Integer> {
+
+    enum STATUS {
+        NORMAL_SUCCESS(1),
+        NORMAL_FAILURE(2),
+        FUSING(3);
+
+        private int id;
+
+        STATUS(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+    }
+
+    static int successRate = 100;
+    static int counter = 0;
+
+    public Command() {
+        super( FusingConfig.class);
+    }
+
+    @Override
+    protected Optional<Integer> run() {
+        counter+=1;
+        if(counter%100>successRate){
+            return null;
+        } else {
+            return Optional.fromNullable(NORMAL_SUCCESS.getId());
+        }
+    }
+
+    @Override
+    protected Integer getFallback(boolean isFusing, Exception e) {
+        if(isFusing){
+            return FUSING.getId();
+        } else {
+            return NORMAL_FAILURE.getId();
+        }
+    }
+
+    public FusingMeter getMeter(){
+        return this.meter;
+    }
+}
