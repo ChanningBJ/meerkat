@@ -2,12 +2,9 @@ package com.qiyi.mbd.common.meter;
 
 import com.google.common.base.Optional;
 import com.qiyi.mbd.common.meter.fusing.FusingCommand;
-import com.qiyi.mbd.common.meter.fusing.FusingConfig;
 import com.qiyi.mbd.common.meter.fusing.FusingMeter;
 
-import static com.qiyi.mbd.common.meter.Command.STATUS.FUSING;
-import static com.qiyi.mbd.common.meter.Command.STATUS.NORMAL_FAILURE;
-import static com.qiyi.mbd.common.meter.Command.STATUS.NORMAL_SUCCESS;
+import static com.qiyi.mbd.common.meter.Command.STATUS.*;
 
 /**
  * 请求成功返回1,请求失败返回2,熔断状态返回3
@@ -34,7 +31,7 @@ public class Command extends FusingCommand<Integer> {
     static int counter = 0;
 
     public Command() {
-        super( FusingConfig.class);
+        super( APPFusingConfig.class);
     }
 
     @Override

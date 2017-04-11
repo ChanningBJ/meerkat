@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.aeonbits.owner</groupId>
             <artifactId>owner</artifactId>
-            <version>1.0.10-SNAPSHOT</version>
+            <version>1.0.9</version>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>com.iqiyi.apollo</groupId>-->

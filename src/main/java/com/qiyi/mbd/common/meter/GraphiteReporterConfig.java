@@ -5,17 +5,9 @@ import org.aeonbits.owner.Config;
 /**
  * Created by chengmingwang on 12/3/16.
  */
-//@Config.LoadPolicy(Config.LoadType.MERGE)
-//@Config.Sources({
-//        ConfigCenter.CONFIG_SOURCE_FILEPATH_V1,
-//        ConfigCenter.CONFIG_SOURCE_FILEPATH_V2,
-//        ConfigCenter.CONFIG_SOURCE_FILEPATH_V3,
-//        ConfigCenter.CONFIG_SOURCE_FILEPATH_V4,
-//        ConfigCenter.CONFIG_SOURCE_FILEPATH,
-//        ConfigCenter.CONFIG_SOURCE_CLASSPATH,
-//        ConfigCenter.CONFIG_SOURCE_CLASSPATH_V1,
-//})
-//@Config.HotReload(value = 2, unit = java.util.concurrent.TimeUnit.MINUTES)
+@Config.Sources({
+        "classpath:config.properties"
+})
 public interface GraphiteReporterConfig extends Config {
     @Config.Key("meter.reporter.enabled.hosts")
     String[] enableHosts();
