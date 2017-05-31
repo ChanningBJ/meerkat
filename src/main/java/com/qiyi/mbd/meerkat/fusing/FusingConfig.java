@@ -1,15 +1,15 @@
-package com.qiyi.mbd.common.meter.fusing;
+package com.qiyi.mbd.meerkat.fusing;
 
-import com.qiyi.mbd.common.meter.Period;
+import com.qiyi.mbd.meerkat.meter.Period;
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Reloadable;
 
 /**
  * Created by chengmingwang on 1/18/17.
  */
-@Config.Sources({
-        "classpath:config.properties"
-})
+//@Config.Sources({
+//        "classpath:config.properties"
+//})
 @Config.HotReload(
         value = 1, unit = java.util.concurrent.TimeUnit.MINUTES,
         type = Config.HotReloadType.ASYNC)
@@ -26,7 +26,7 @@ public interface FusingConfig extends Reloadable {
 
     @Key("fusing.${"+CONFIG_KEY_INSTANCE+"}.mode")
     @DefaultValue("FORCE_NORMAL")
-    FUSING_MODE fusingMode();
+    FusingMode fusingMode();
 
     /**
      * 触发一次熔断的持续时间

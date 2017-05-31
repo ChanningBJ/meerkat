@@ -1,10 +1,10 @@
-package com.qiyi.mbd.common.meter.fusing;
+package com.qiyi.mbd.meerkat.fusing;
 
 import com.codahale.metrics.MetricRegistry;
-import com.qiyi.mbd.common.meter.HistoryRatioGauge;
-import com.qiyi.mbd.common.meter.LogicMeterBuilder;
-import com.qiyi.mbd.common.meter.MeterCenter;
-import com.qiyi.mbd.common.meter.OperationMeter;
+import com.qiyi.mbd.meerkat.meter.HistoryRatioGauge;
+import com.qiyi.mbd.meerkat.meter.LogicMeterBuilder;
+import com.qiyi.mbd.meerkat.meter.MeterCenter;
+import com.qiyi.mbd.meerkat.meter.OperationMeter;
 import lombok.extern.log4j.Log4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.aeonbits.owner.event.ReloadEvent;
@@ -92,7 +92,7 @@ public class FusingMeter extends OperationMeter {
     }
 
     private void logFusingConfig(){
-        log.info("fusing."+configInstanceName+".mode = "+fusingConfig.fusingMode().name());
+        log.info("fusing."+configInstanceName+".mode = "+fusingConfig.fusingMode().getMode().name());
         log.info("fusing."+configInstanceName+".duration = "+fusingConfig.fusingTime().toString());
         log.info("fusing."+configInstanceName+".success_rate_threshold = "+fusingConfig.fusingRatio());
     }
@@ -105,7 +105,7 @@ public class FusingMeter extends OperationMeter {
     public void refreshStatus() {
         super.refreshStatus();
 
-        switch(fusingConfig.fusingMode()){
+        switch(fusingConfig.fusingMode().getMode()){
             case AUTO_FUSING:
                 if(timestamp4FusingStart.get()==0){ //没有熔断,检查是否需要进入熔断状态
                     if(this.getUpdateCycleSuccessRatio()<fusingConfig.fusingRatio()*100){ //达到熔断阈值

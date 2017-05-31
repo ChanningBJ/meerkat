@@ -1,7 +1,7 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
 import com.google.common.base.Optional;
-import com.qiyi.mbd.common.meter.fusing.FusingCommand;
+import com.qiyi.mbd.meerkat.fusing.FusingCommand;
 
 /**
  * Created by chengmingwang on 3/24/17.

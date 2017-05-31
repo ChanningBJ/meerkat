@@ -1,4 +1,4 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
 import com.codahale.metrics.*;
 import lombok.extern.log4j.Log4j;

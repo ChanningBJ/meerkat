@@ -1,10 +1,10 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
 import com.google.common.base.Optional;
-import com.qiyi.mbd.common.meter.fusing.FusingCommand;
-import com.qiyi.mbd.common.meter.fusing.FusingMeter;
+import com.qiyi.mbd.meerkat.fusing.FusingCommand;
+import com.qiyi.mbd.meerkat.fusing.FusingMeter;
 
-import static com.qiyi.mbd.common.meter.Command.STATUS.*;
+import static com.qiyi.mbd.meerkat.meter.Command.STATUS.*;
 
 /**
  * 请求成功返回1,请求失败返回2,熔断状态返回3

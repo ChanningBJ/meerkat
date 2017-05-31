@@ -1,4 +1,4 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
 import com.codahale.metrics.Timer;
 import junit.framework.Assert;
@@ -13,8 +13,8 @@ public class OperationMeterTest {
     @BeforeClass
     public static void setup(){
         MeterCenter.INSTANCE
-                .setUpdaterCycleSecond(10)
-                .setReporterCycleSecond(60)
+//                .setUpdaterCycleSecond(10)
+//                .setReporterCycleSecond(60)
                 .enableReporter(new EnablingLogReporter("org.apache.log4j.ConsoleAppender"))
                 .init();
     }

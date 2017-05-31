@@ -1,4 +1,4 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
 import com.codahale.metrics.*;
 

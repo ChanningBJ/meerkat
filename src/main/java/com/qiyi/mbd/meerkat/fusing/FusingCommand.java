@@ -1,10 +1,10 @@
-package com.qiyi.mbd.common.meter.fusing;
+package com.qiyi.mbd.meerkat.fusing;
 
 
 import com.codahale.metrics.Timer;
 import com.google.common.base.Optional;
-import com.qiyi.mbd.common.meter.MeterCenter;
-import com.qiyi.mbd.common.meter.OperationMeter;
+import com.qiyi.mbd.meerkat.meter.MeterCenter;
+import com.qiyi.mbd.meerkat.meter.OperationMeter;
 import lombok.extern.log4j.Log4j;
 
 /**

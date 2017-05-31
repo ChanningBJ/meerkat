@@ -1,6 +1,6 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
-import com.qiyi.mbd.common.meter.fusing.FusingConfig;
+import com.qiyi.mbd.meerkat.fusing.FusingConfig;
 import org.aeonbits.owner.Config;
 
 /**

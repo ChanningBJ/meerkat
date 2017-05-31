@@ -1,13 +1,13 @@
-package com.qiyi.mbd.common.meter;
+package com.qiyi.mbd.meerkat.meter;
 
 import org.aeonbits.owner.Config;
 
 /**
  * Created by chengmingwang on 12/3/16.
  */
-@Config.Sources({
-        "classpath:config.properties"
-})
+//@Config.Sources({
+//        "classpath:config.properties"
+//})
 public interface GraphiteReporterConfig extends Config {
     @Config.Key("meter.reporter.enabled.hosts")
     String[] enableHosts();
