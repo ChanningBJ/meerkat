@@ -138,3 +138,4 @@ local.properties
 
 /target/
 /.idea/
+/meerkat.iml
