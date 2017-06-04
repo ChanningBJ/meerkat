@@ -53,9 +53,7 @@ public class GetPlayCountCommand extends FusingCommand<Long> {
 //获取视频ID为123的视频的播放次数
 GetPlayCountCommand command = new GetPlayCountCommand(123l);
 Long result = command.execute(); // 执行查询操作，如果执行失败或者处于熔断状态，返回 null 
-```        
-
-
+```
 
 ### 配置监控上报
 
