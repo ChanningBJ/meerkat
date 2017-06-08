@@ -215,3 +215,7 @@ fusing.[CommandClassName].success_rate_threshold | 触发熔断的成功率阀�
 
 配置文件中的 CommandClassName 是每个操作类的名称，可以为每个操作单独设置上述参数。同时，这个配置文件支持动态加载，乐意通过修改fusing.[CommandClassName].mode 手工触发或者关闭熔断。
 
+
+使用中有任何问题，欢迎与我联系
+
+![image](https://github.com/qiyimbd/meerkat/blob/master/wechat.png)
