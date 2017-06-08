@@ -171,3 +171,46 @@ type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min
 关于Graphite+Grafana的配置，可以参考文章：[使用graphite和grafana进行应用程序监控](https://segmentfault.com/a/1190000007540752) 
  
 ### 配置熔断的阀值和持续时间
+
+首先创建一个接口，继承自FusingConfig，用于指定配置文件的加载路径，同时还可以设定配置文件的刷新时间，具体定义方法请参照 [owner 文档](http://owner.aeonbits.org)
+
+```java
+@Config.Sources("classpath:app_config.properties")
+@Config.HotReload(
+        value = 1, unit = java.util.concurrent.TimeUnit.MINUTES,
+        type = Config.HotReloadType.ASYNC)
+public interface APPFusingConfig extends FusingConfig {
+}
+```
+
+创建查询Command的时候在构造函数中传入
+
+```java
+public class GetPlayCountCommand extends FusingCommand<Long> {
+
+    private final Long videoID;
+
+    public GetPlayCountCommand(Long videoID) {
+        super( APPFusingConfig.class);
+        this.videoID = videoID;
+    }
+        
+    protected Optional<Long> run() {
+        Long result = 0l;
+        // 调用HTTP接口获取视频的播放次数信息
+        // 如果调用失败，返回 null 或者抛出异常，会将这次操作记录为失败
+        // 如果ID非法，返回 Optional.absent(),会将这次操作记录为成功
+        return Optional.fromNullable(result);
+    }
+}
+``` 
+
+
+配置文件定义：
+
+
+监控项 | 含义 | 默认值
+------------ | ------------- | -------------
+fusing.[CommandClassName].mode | 熔断模式：FORCE_NORMAL－关闭熔断功能; AUTO_FUSING－自动进入熔断模式; FORCE_NORMAL－强制进行熔断 | FORCE_NORMAL
+
+
