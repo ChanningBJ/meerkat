@@ -7,8 +7,6 @@ meerkat 是一个服务监控以及服务降级基础组件，主要为了解决
 1. log文件和Grafhite两种监控指标上报方式，支持扩展其他的上报方式
 1. （可选功能）成功率下降到预设的阈值以下触发熔断保护，暂定对外部接口的访问，成功率恢复以后自动恢复访问
 
-## Why meerkat
-
 
 ## Maven 
 
@@ -55,7 +53,7 @@ GetPlayCountCommand command = new GetPlayCountCommand(123l);
 Long result = command.execute(); // 执行查询操作，如果执行失败或者处于熔断状态，返回 null 
 ```
 
-默认情况下，操作成功率每10秒更新一次，当成功率小于90%的时候进入熔断状态，熔断状态下调用execute()函数会返回null，熔断状态持续50秒，终端终止以后恢复正常访问。
+默认情况下，操作成功率每10秒更新一次，开启通断以后当成功率小于90%的时候进入熔断状态，熔断状态下调用execute()函数会返回null，熔断状态持续50秒，终端终止以后恢复正常访问。
 
 ### 定义熔断状态下的返回结果
 
@@ -171,3 +169,49 @@ type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min
 关于Graphite+Grafana的配置，可以参考文章：[使用graphite和grafana进行应用程序监控](https://segmentfault.com/a/1190000007540752) 
  
 ### 配置熔断的阀值和持续时间
+
+首先创建一个接口，继承自FusingConfig，用于指定配置文件的加载路径，同时还可以设定配置文件的刷新时间，具体定义方法请参照 [owner 文档](http://owner.aeonbits.org)
+
+```java
+@Config.Sources("classpath:app_config.properties")
+@Config.HotReload(
+        value = 1, unit = java.util.concurrent.TimeUnit.MINUTES,
+        type = Config.HotReloadType.ASYNC)
+public interface APPFusingConfig extends FusingConfig {
+}
+```
+
+创建查询Command的时候在构造函数中传入
+
+```java
+public class GetPlayCountCommand extends FusingCommand<Long> {
+
+    private final Long videoID;
+
+    public GetPlayCountCommand(Long videoID) {
+        super( APPFusingConfig.class);
+        this.videoID = videoID;
+    }
+        
+    protected Optional<Long> run() {
+        Long result = 0l;
+        // 调用HTTP接口获取视频的播放次数信息
+        // 如果调用失败，返回 null 或者抛出异常，会将这次操作记录为失败
+        // 如果ID非法，返回 Optional.absent(),会将这次操作记录为成功
+        return Optional.fromNullable(result);
+    }
+}
+``` 
+
+
+配置文件定义：
+
+
+监控项 | 含义 | 默认值
+------------ | ------------- | -------------
+fusing.[CommandClassName].mode | 熔断模式：<br>FORCE_NORMAL－关闭熔断功能;<br> AUTO_FUSING－自动进入熔断模式;<br> FORCE_NORMAL－强制进行熔断 | FORCE_NORMAL
+fusing.[CommandClassName].duration | 触发一次熔断以后持续的时间，支持ms,sec,min 单位。例如 10sec | 50sec
+fusing.[CommandClassName].success_rate_threshold | 触发熔断的成功率阀值，降低到这个成功率以下将触发熔断，例如0.9表示成功率90% | 0.9
+
+配置文件中的 CommandClassName 是每个操作类的名称，可以为每个操作单独设置上述参数。同时，这个配置文件支持动态加载，乐意通过修改fusing.[CommandClassName].mode 手工触发或者关闭熔断。
+
