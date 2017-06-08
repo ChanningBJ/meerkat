@@ -212,5 +212,7 @@ public class GetPlayCountCommand extends FusingCommand<Long> {
 监控项 | 含义 | 默认值
 ------------ | ------------- | -------------
 fusing.[CommandClassName].mode | 熔断模式：<br>FORCE_NORMAL－关闭熔断功能;<br> AUTO_FUSING－自动进入熔断模式;<br> FORCE_NORMAL－强制进行熔断 | FORCE_NORMAL
+fusing.[CommandClassName].duration | 触发一次熔断以后持续的时间，支持ms,sec,min 单位。例如 10sec | 50sec
+fusing.[CommandClassName].success_rate_threshold | 触发熔断的成功率阀值，降低到这个成功率以下将触发熔断，例如0.9表示成功率90% | 0.9
 
 
