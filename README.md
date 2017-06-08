@@ -211,6 +211,6 @@ public class GetPlayCountCommand extends FusingCommand<Long> {
 
 监控项 | 含义 | 默认值
 ------------ | ------------- | -------------
-fusing.[CommandClassName].mode | 熔断模式：FORCE_NORMAL－关闭熔断功能; AUTO_FUSING－自动进入熔断模式; FORCE_NORMAL－强制进行熔断 | FORCE_NORMAL
+fusing.[CommandClassName].mode | 熔断模式：<br>FORCE_NORMAL－关闭熔断功能;<br> AUTO_FUSING－自动进入熔断模式;<br> FORCE_NORMAL－强制进行熔断 | FORCE_NORMAL
 
 
