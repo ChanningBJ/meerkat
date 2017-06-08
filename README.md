@@ -147,13 +147,27 @@ MeterCenter.INSTANCE
 #### 查看统计结果
 
 
+统计结果会以熔断命令类名为进行分组。例如前面我们定义的 GetPlayCountCommand 类,package name 是 com.qiyi.mbd.test，那么在日志中的输出将会是这个样子：
+
+```
+type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.normal-rate, value=0.0
+type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.success-rate, value=61.0
+type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min=0.0, max=0.001, mean=3.963926781047921E-5, stddev=1.951102156677818E-4, median=0.0, p75=0.0, p95=0.0, p98=0.001, p99=0.001, p999=0.001, mean_rate=649806.0831335272, m1=1665370.7316699813, m5=2315813.300713087, m15=2446572.324069477, rate_unit=events/second, duration_unit=milliseconds
+```
+
+监控项 | 含义
+------------ | -------------
+[classname].success-rate | 成功率
+[classname].time.m1 | QPS
+[classname].time.mean | 平均响应时间
+[classname].normal-rate | 过去1分钟内处于正常访问（非熔断）的时间比例
 
 
+如果配置了Graphite上报，可以看到下面的监控图
 
 
-
- ![image](https://github.com/qiyimbd/meerkat/blob/master/dashboard.png)
+![image](https://github.com/qiyimbd/meerkat/blob/master/dashboard.png)
  
- 
+关于Graphite+Grafana的配置，可以参考文章：[使用graphite和grafana进行应用程序监控](https://segmentfault.com/a/1190000007540752) 
  
 ### 配置熔断的阀值和持续时间
