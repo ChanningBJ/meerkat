@@ -91,17 +91,19 @@ public class GetPlayCountCommand extends FusingCommand<Long> {
 }
 ```  
 
-#### 配置熔断的阀值和持续时间
 
-TODO
+
+
+
 
 
 
 ### 配置监控上报
 
-首先定义一个接口，继承自GraphiteReporterConfig，通过这个接口定义配置文件的加载路径。配置文件路径的定义方法请参照 [owner 文档](http://owner.aeonbits.org)
 
+#### 定义配置文件
 
+首先定义一个接口，继承自GraphiteReporterConfig，通过这个接口定义配置文件的加载路径。配置文件路径的定义方法请参照 [owner 文档](http://owner.aeonbits.org), 下面是一个例子：
 
 
 ```java
@@ -111,18 +113,47 @@ public interface MyConfig extends GraphiteReporterConfig {
 ```
 
 
-
-
 配置文件中需要定义下列内容：
 
 
 配置项 | 含义
 ------------ | -------------
 meter.reporter.enabled.hosts | 开启监控上报的服务器列表
-meter.reporter.perfix ｜上报使用的前缀
+meter.reporter.perfix | 上报使用的前缀
 meter.reporter.carbon.host | grafana(carbon-cache) 的 IP 地址，用于存储监控数据
 meter.reporter.carbon.port| grafana(carbon-cache) 的端口
+
+下面这个例子是在192.168.0.0.1和192.168.0.0.2两台服务器上开启监控数据上报，上报监控指标的前缀是project_name.dc：
+```
+meter.reporter.enabled.hosts = 192.168.0.0.1,192.168.0.0.2
+meter.reporter.perfix = project_name.dc
+meter.reporter.carbon.host = hostname.graphite
+```
+由于相同机房的不同服务器对外部接口的访问情况一般比较类似，所以仅选取部分机器上报，也是为了节省资源。仅选择部分机器上报不影响熔断效果。
+
+
+#### 初始化配置上报
+
+在服务初始化的时候需要对监控上报进行设置。下面的例子中开启了监控数据向日志文件的打印，同时通过MyConfig指定的配置文件加载Graphite配置信息。
+
+```
+MeterCenter.INSTANCE
+    .enableReporter(new EnablingLogReporter("org.apache.log4j.RollingFileAppender"))
+    .enableReporter(new EnablingGraphiteReporter(MyConfig.class))
+    .init();
+```
+
+
+#### 查看统计结果
+
+
+
+
 
 
 
  ![image](https://github.com/qiyimbd/meerkat/blob/master/dashboard.png)
+ 
+ 
+ 
+### 配置熔断的阀值和持续时间
