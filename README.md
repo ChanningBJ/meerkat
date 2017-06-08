@@ -215,4 +215,5 @@ fusing.[CommandClassName].mode | 熔断模式：<br>FORCE_NORMAL－关闭熔断�
 fusing.[CommandClassName].duration | 触发一次熔断以后持续的时间，支持ms,sec,min 单位。例如 10sec | 50sec
 fusing.[CommandClassName].success_rate_threshold | 触发熔断的成功率阀值，降低到这个成功率以下将触发熔断，例如0.9表示成功率90% | 0.9
 
+配置文件中的 CommandClassName 是每个操作类的名称，可以为每个操作单独设置上述参数。同时，这个配置文件支持动态加载，乐意通过修改fusing.[CommandClassName].mode 手工触发或者关闭熔断。
 
