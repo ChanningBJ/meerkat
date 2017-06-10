@@ -8,6 +8,37 @@
     <artifactId>meerkat</artifactId>
     <version>1.0</version>
 
+    <name>meerkat</name>
+    <description>
+        Meerkat is an operation monitor and service degradation component which can
+        1. collect success rate and average time cost of predefined operations
+        2. Cutoff the function call when success rate falling below certain threshold, resume the function call after success rate back to normal.
+    </description>
+
+    <url>https://github.com/qiyimbd/meerkat</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>https://github.com/qiyimbd/meerkat.git</connection>
+        <developerConnection>https://github.com/qiyimbd/meerkat.git</developerConnection>
+        <url>https://github.com/qiyimbd/meerkat.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Cheng Ming Wang</name>
+            <email>chengming_wang@foxmail.com</email>
+            <url>https://github.com/ChanningBJ</url>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
     <distributionManagement>
         <snapshotRepository>
             <id>oss</id>
@@ -37,10 +68,6 @@
             <artifactId>metrics-graphite</artifactId>
             <version>3.1.2</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>io.dropwizard.metrics</groupId>-->
-            <!--<artifactId>metrics-json</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -51,10 +78,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-log4j12</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -70,20 +93,6 @@
             <artifactId>owner</artifactId>
             <version>1.0.9</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.iqiyi.apollo</groupId>-->
-        <!--<artifactId>apollo-metric-sender</artifactId>-->
-        <!--<version>2.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.qiyi.mbd</groupId>-->
-        <!--<artifactId>common-config</artifactId>-->
-        <!--<version>5-SNAPSHOT</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.google.guava</groupId>-->
-            <!--<artifactId>guava</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -105,6 +114,53 @@
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <links>
+                        <link>http://docs.oracle.com/javase/2.10.4/docs/api</link>
+                    </links>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
