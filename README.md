@@ -7,6 +7,16 @@ meerkat 是一个服务监控以及服务降级基础组件，主要为了解决
 1. log文件和Grafhite两种监控指标上报方式，支持扩展其他的上报方式
 1. （可选功能）成功率下降到预设的阈值以下触发熔断保护，暂定对外部接口的访问，成功率恢复以后自动恢复访问
 
+通过日志的方式查看监控结果
+```
+type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.normal-rate, value=0.0
+type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.success-rate, value=61.0
+type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min=0.0, max=0.001, mean=3.963926781047921E-5, stddev=1.951102156677818E-4, median=0.0, p75=0.0, p95=0.0, p98=0.001, p99=0.001, p999=0.001, mean_rate=649806.0831335272, m1=1665370.7316699813, m5=2315813.300713087, m15=2446572.324069477, rate_unit=events/second, duration_unit=milliseconds
+```
+
+通过上报Grafana查看监控结果
+![image](https://github.com/qiyimbd/meerkat/blob/master/dashboard.png)
+
 
 ## Maven 
 
