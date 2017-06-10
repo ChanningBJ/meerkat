@@ -22,9 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Getter
 public enum MeterCenter {
     INSTANCE;
-
-    //TODO: 屏蔽掉LogicMeter的report
-
+    
     private final MetricRegistry metricRegistry = new MetricRegistry();
     private final ConcurrentHashMap<String, LogicMeter> meters = new ConcurrentHashMap<String, LogicMeter>();
     private LogicMeterStatusUpdater updater;
