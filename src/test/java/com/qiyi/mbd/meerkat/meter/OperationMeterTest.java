@@ -98,6 +98,24 @@ public class OperationMeterTest {
         }
     }
 
+    @Test
+    public void multiInstanceTest() throws Exception {
+        for(int k=0; k<100; k++)  {
+            MultiInstanceCommand cmdA = new MultiInstanceCommand("A");
+            MultiInstanceCommand cmdB = new MultiInstanceCommand("B");
+            cmdA.execute();
+            cmdB.execute();
+        }
+
+        Thread.sleep(1000*10);         //默认统计周期是10秒
+        MultiInstanceCommand cmdA = new MultiInstanceCommand("A");
+        MultiInstanceCommand cmdB = new MultiInstanceCommand("B");
+        Assert.assertEquals(100.0, cmdA.getMeter().getValue());
+        Assert.assertEquals(60.0, cmdB.getMeter().getValue());
+
+
+    }
+
     private long loopUntilStatusChanged(boolean fusingStatus, Command cmd){
         long start = System.currentTimeMillis();
         while(true){

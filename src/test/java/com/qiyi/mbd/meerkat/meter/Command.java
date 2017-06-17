@@ -31,13 +31,13 @@ public class Command extends FusingCommand<Integer> {
     static int counter = 0;
 
     public Command() {
-        super( APPFusingConfig.class);
+        super(APPFusingConfig.class);
     }
 
     @Override
     protected Optional<Integer> run() {
-        counter+=1;
-        if(counter%100>successRate){
+        counter += 1;
+        if (counter % 100 > successRate) {
             return null;
         } else {
             return Optional.fromNullable(NORMAL_SUCCESS.getId());
@@ -46,14 +46,14 @@ public class Command extends FusingCommand<Integer> {
 
     @Override
     protected Integer getFallback(boolean isFusing, Exception e) {
-        if(isFusing){
+        if (isFusing) {
             return FUSING.getId();
         } else {
             return NORMAL_FAILURE.getId();
         }
     }
 
-    public FusingMeter getMeter(){
+    public FusingMeter getMeter() {
         return this.meter;
     }
 }
