@@ -6,7 +6,7 @@
 
     <groupId>com.github.qiyimbd</groupId>
     <artifactId>meerkat</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
 
     <name>meerkat</name>
     <description>
