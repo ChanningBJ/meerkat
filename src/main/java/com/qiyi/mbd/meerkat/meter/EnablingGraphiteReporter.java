@@ -35,15 +35,15 @@ public class EnablingGraphiteReporter implements EnablingReporter {
     public void invoke(MetricRegistry metricRegistry, long period, TimeUnit timeUnit) {
         if(config.enableHosts()==null){
             log.info("meter.reporter.enabled.hosts is missing in config file, GraphiteReporter disabled");
-            return ;
+            return;
         }
-        if(config.enablePerfix()==null){
+        if (config.enablePerfix() == null) {
             log.info("meter.reporter.perfix is missing in config file, GraphiteReporter disabled");
-            return ;
+            return;
         }
-        if(config.carbonHost()==null){
+        if (config.carbonHost() == null) {
             log.info("meter.reporter.carbon.host is missing in config file, GraphiteReporter disabled");
-            return ;
+            return;
         }
         Enumeration<NetworkInterface> n = null;
         try {
@@ -52,19 +52,17 @@ public class EnablingGraphiteReporter implements EnablingReporter {
             e.printStackTrace();
             log.error("Failed get ip address, will not enable GraphiteReporter");
             log.info("Metrics report disabled");
-            return ;
+            return;
         }
-        for (; n.hasMoreElements();)
-        {
+        for (; n.hasMoreElements(); ) {
             NetworkInterface e = n.nextElement();
 
             Enumeration<InetAddress> a = e.getInetAddresses();
-            for (; a.hasMoreElements();)
-            {
+            for (; a.hasMoreElements(); ) {
                 InetAddress addr = a.nextElement();
-                if(ArrayUtils.contains(config.enableHosts(),addr.getHostAddress())){
+                if (isMatchedReporterAddress(config.enableHosts(), addr.getHostAddress())) {
                     Graphite graphiteReporter = new Graphite(new InetSocketAddress(config.carbonHost(), config.carbonPort()));
-                    String perfix = config.enablePerfix()+"."+addr.getHostAddress().replace(".","-");
+                    String perfix = config.enablePerfix() + "." + addr.getHostAddress().replace(".", "-");
                     GraphiteReporter.forRegistry(metricRegistry)
                             .prefixedWith(perfix)
                             .convertRatesTo(TimeUnit.SECONDS)
@@ -72,14 +70,33 @@ public class EnablingGraphiteReporter implements EnablingReporter {
                             .filter(MetricFilter.ALL)
                             .build(graphiteReporter)
                             .start(period, timeUnit);
-                    log.info("Metrics report enabled with perfix: "+perfix);
-                    return ;
+                    log.info("Metrics report enabled with perfix: " + perfix);
+                    return;
                 } else {
-                    log.info(addr.getHostAddress()+" against "+ ArrayUtils.toString(config.enableHosts()));
+                    log.info(addr.getHostAddress() + " against " + ArrayUtils.toString(config.enableHosts()));
                 }
             }
         }
         log.info("Metrics report disabled");
-        return ;
+        return;
+    }
+
+    private boolean isMatchedReporterAddress(final String[] enabledHosts, final String hostAddress) {
+        for (String host : enabledHosts) {
+            //检查第一个*，然后进行前缀匹配，不带通配符的，进行正常值比对
+            int index = host.indexOf("*");
+            if (index > -1) {
+                String prifixAddress = host.substring(0, index).trim();
+                if (hostAddress.startsWith(prifixAddress)) {
+                    return true;
+                }
+            } else {
+                if (host.trim().equalsIgnoreCase(hostAddress)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
