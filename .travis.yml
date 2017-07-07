@@ -14,7 +14,7 @@ deploy:
     script: .travis/deploy.sh
     skip_cleanup: true
     on:
-      repo: ExampleOrg/my-library
+      repo: com.github.qiyimbd/meerkat
       branch: master
       jdk: oraclejdk8
   -
@@ -22,6 +22,14 @@ deploy:
     script: .travis/deploy.sh
     skip_cleanup: true
     on:
-      repo: ExampleOrg/my-library
+      repo: com.github.qiyimbd/meerkat
       tags: true
-      jdk: oraclejdk8
+      jdk: oraclejdk7
+  -
+    provider: script
+    script: .travis/deploy.sh
+    skip_cleanup: true
+    on:
+      repo: com.github.qiyimbd/meerkat
+      tags: true
+      jdk: openjdk7
