@@ -9,24 +9,21 @@ before_install:
   - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
   - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
 deploy:
-  -
-    provider: script
+  - provider: script
     script: .travis/deploy.sh
     skip_cleanup: true
     on:
       repo: com.github.qiyimbd/meerkat
       branch: master
       jdk: oraclejdk8
-  -
-    provider: script
+  - provider: script
     script: .travis/deploy.sh
     skip_cleanup: true
     on:
       repo: com.github.qiyimbd/meerkat
       tags: true
       jdk: oraclejdk7
-  -
-    provider: script
+  - provider: script
     script: .travis/deploy.sh
     skip_cleanup: true
     on:
