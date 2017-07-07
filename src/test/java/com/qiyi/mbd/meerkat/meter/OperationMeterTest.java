@@ -38,7 +38,7 @@ public class OperationMeterTest {
         }
 
         //默认统计周期是10秒
-        Thread.sleep(1000*10);
+        Thread.sleep(1000*15);
 
         //统计结果成功率60%
         Assert.assertEquals(60.0, meter.getUpdateCycleSuccessRatio());
