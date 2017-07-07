@@ -22,14 +22,17 @@ import java.util.concurrent.TimeUnit;
 @Log4j
 public class EnablingGraphiteReporter implements EnablingReporter {
 
-    private Class<? extends GraphiteReporterConfig> configCls;
+    private GraphiteReporterConfig config = null;
 
     public EnablingGraphiteReporter( Class<? extends GraphiteReporterConfig> configCls) {
-        this.configCls = configCls;
+         this.config = ConfigFactory.create(configCls);
     }
+    public EnablingGraphiteReporter( GraphiteReporterConfig configCls) {
+        this.config = configCls;
+    }
+
     @Override
     public void invoke(MetricRegistry metricRegistry, long period, TimeUnit timeUnit) {
-        GraphiteReporterConfig config = ConfigFactory.create(configCls);
         if(config.enableHosts()==null){
             log.info("meter.reporter.enabled.hosts is missing in config file, GraphiteReporter disabled");
             return ;
