@@ -27,7 +27,7 @@ type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min
 <dependency>
     <groupId>com.github.qiyimbd</groupId>
     <artifactId>meerkat</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
 
