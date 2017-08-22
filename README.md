@@ -1,6 +1,6 @@
 # meerkat
 
-meerkat 是爱奇艺移动服务端团队开发的服务监控以及服务降级基础组件，主要为了解决调用外部接口的时候进行成功率，响应时间，QPS指标的监控，同时在成功率下降到预设的阈值以下的时候自动切断外部接口的调用，外部接口成功率恢复后自动恢复请求。
+meerkat 是用于服务监控以及服务降级基础组件，主要为了解决调用外部接口的时候进行成功率，响应时间，QPS指标的监控，同时在成功率下降到预设的阈值以下的时候自动切断外部接口的调用，外部接口成功率恢复后自动恢复请求。
 
 ## 主要功能
 
@@ -12,13 +12,13 @@ meerkat 是爱奇艺移动服务端团队开发的服务监控以及服务降级
 
 通过日志的方式查看监控结果
 ```
-type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.normal-rate, value=0.0
-type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.success-rate, value=61.0
-type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min=0.0, max=0.001, mean=3.963926781047921E-5, stddev=1.951102156677818E-4, median=0.0, p75=0.0, p95=0.0, p98=0.001, p99=0.001, p999=0.001, mean_rate=649806.0831335272, m1=1665370.7316699813, m5=2315813.300713087, m15=2446572.324069477, rate_unit=events/second, duration_unit=milliseconds
+type=GAUGE, name=com.test.GetPlayCountCommand.normal-rate, value=0.0
+type=GAUGE, name=com.test.GetPlayCountCommand.success-rate, value=61.0
+type=TIMER, name=com.test.GetPlayCountCommand.time, count=25866500, min=0.0, max=0.001, mean=3.963926781047921E-5, stddev=1.951102156677818E-4, median=0.0, p75=0.0, p95=0.0, p98=0.001, p99=0.001, p999=0.001, mean_rate=649806.0831335272, m1=1665370.7316699813, m5=2315813.300713087, m15=2446572.324069477, rate_unit=events/second, duration_unit=milliseconds
 ```
 
 通过上报Grafana查看监控结果
-![image](https://github.com/qiyimbd/meerkat/blob/master/dashboard.png)
+![image](https://github.com/ChanningBJ/meerkat/blob/master/dashboard.png)
 
 
 ## Maven 
@@ -161,9 +161,9 @@ MeterCenter.INSTANCE
 统计结果会以熔断命令类名为进行分组。例如前面我们定义的 GetPlayCountCommand 类,package name 是 com.qiyi.mbd.test，那么在日志中的输出将会是这个样子：
 
 ```
-type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.normal-rate, value=0.0
-type=GAUGE, name=com.qiyi.mbd.test.GetPlayCountCommand.success-rate, value=61.0
-type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min=0.0, max=0.001, mean=3.963926781047921E-5, stddev=1.951102156677818E-4, median=0.0, p75=0.0, p95=0.0, p98=0.001, p99=0.001, p999=0.001, mean_rate=649806.0831335272, m1=1665370.7316699813, m5=2315813.300713087, m15=2446572.324069477, rate_unit=events/second, duration_unit=milliseconds
+type=GAUGE, name=com.test.GetPlayCountCommand.normal-rate, value=0.0
+type=GAUGE, name=com.test.GetPlayCountCommand.success-rate, value=61.0
+type=TIMER, name=com.test.GetPlayCountCommand.time, count=25866500, min=0.0, max=0.001, mean=3.963926781047921E-5, stddev=1.951102156677818E-4, median=0.0, p75=0.0, p95=0.0, p98=0.001, p99=0.001, p999=0.001, mean_rate=649806.0831335272, m1=1665370.7316699813, m5=2315813.300713087, m15=2446572.324069477, rate_unit=events/second, duration_unit=milliseconds
 ```
 
 监控项 | 含义
@@ -177,7 +177,7 @@ type=TIMER, name=com.qiyi.mbd.test.GetPlayCountCommand.time, count=25866500, min
 如果配置了Graphite上报，可以看到下面的监控图
 
 
-![image](https://github.com/qiyimbd/meerkat/blob/master/dashboard.png)
+![image](https://github.com/ChanningBJ/meerkat/blob/master/dashboard.png)
  
 关于Graphite+Grafana的配置，可以参考文章：[使用graphite和grafana进行应用程序监控](https://segmentfault.com/a/1190000007540752) 
  
@@ -231,4 +231,4 @@ fusing.[CommandClassName].success_rate_threshold | 触发熔断的成功率阀�
 
 使用中有任何问题，欢迎与我联系
 
-![image](https://github.com/qiyimbd/meerkat/blob/master/wechat.png)
+![image](https://github.com/ChanningBJ/meerkat/blob/master/wechat.png)
