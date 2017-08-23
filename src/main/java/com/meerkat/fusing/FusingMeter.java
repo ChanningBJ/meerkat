@@ -1,10 +1,10 @@
-package com.qiyi.mbd.meerkat.fusing;
+package com.meerkat.fusing;
 
 import com.codahale.metrics.MetricRegistry;
-import com.qiyi.mbd.meerkat.meter.HistoryRatioGauge;
-import com.qiyi.mbd.meerkat.meter.LogicMeterBuilder;
-import com.qiyi.mbd.meerkat.meter.MeterCenter;
-import com.qiyi.mbd.meerkat.meter.OperationMeter;
+import com.meerkat.meter.HistoryRatioGauge;
+import com.meerkat.meter.LogicMeterBuilder;
+import com.meerkat.meter.MeterCenter;
+import com.meerkat.meter.OperationMeter;
 import lombok.extern.log4j.Log4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.aeonbits.owner.event.ReloadEvent;

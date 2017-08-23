@@ -1,5 +1,5 @@
 
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;

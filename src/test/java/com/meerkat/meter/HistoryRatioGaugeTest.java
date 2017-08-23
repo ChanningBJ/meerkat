@@ -1,4 +1,4 @@
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 import junit.framework.Assert;
 import org.junit.Test;

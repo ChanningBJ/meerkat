@@ -1,4 +1,4 @@
-package com.qiyi.mbd.meerkat.fusing;
+package com.meerkat.fusing;
 
 import lombok.extern.log4j.Log4j;
 

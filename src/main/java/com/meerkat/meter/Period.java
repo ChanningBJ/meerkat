@@ -1,4 +1,4 @@
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 import org.apache.commons.lang3.StringUtils;
 

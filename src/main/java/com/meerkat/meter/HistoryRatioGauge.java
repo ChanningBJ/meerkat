@@ -1,4 +1,4 @@
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 import com.codahale.metrics.RatioGauge;
 import lombok.extern.log4j.Log4j;

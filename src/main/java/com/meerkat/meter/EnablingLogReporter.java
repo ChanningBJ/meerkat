@@ -1,4 +1,4 @@
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;

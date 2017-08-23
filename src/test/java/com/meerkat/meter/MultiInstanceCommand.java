@@ -1,8 +1,8 @@
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 import com.google.common.base.Optional;
-import com.qiyi.mbd.meerkat.fusing.FusingCommand;
-import com.qiyi.mbd.meerkat.fusing.FusingMeter;
+import com.meerkat.fusing.FusingCommand;
+import com.meerkat.fusing.FusingMeter;
 
 /**
  * Created by chengmingwang on 6/10/17.

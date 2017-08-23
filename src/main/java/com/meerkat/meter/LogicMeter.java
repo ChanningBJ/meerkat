@@ -1,4 +1,4 @@
-package com.qiyi.mbd.meerkat.meter;
+package com.meerkat.meter;
 
 /**
  * Created by chengmingwang on 10/6/2016.

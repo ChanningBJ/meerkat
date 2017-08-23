@@ -1,6 +1,6 @@
-package com.qiyi.mbd.meerkat.fusing;
+package com.meerkat.fusing;
 
-import com.qiyi.mbd.meerkat.meter.Period;
+import com.meerkat.meter.Period;
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Reloadable;
 
