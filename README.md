@@ -25,9 +25,9 @@ type=TIMER, name=com.test.GetPlayCountCommand.time, count=25866500, min=0.0, max
 
 ```xml
 <dependency>
-    <groupId>com.github.qiyimbd</groupId>
+    <groupId>com.github.channingbj</groupId>
     <artifactId>meerkat</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
