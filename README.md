@@ -8,7 +8,7 @@ meerkat 是用于服务监控以及服务降级基础组件，主要为了解决
 1. log文件和Grafhite两种监控指标上报方式，支持扩展其他的上报方式
 1. （可选功能）成功率下降到预设的阈值以下触发熔断保护，暂定对外部接口的访问，成功率恢复以后自动恢复访问
 
-更详细的文档说明请参见 [Wiki](https://github.com/qiyimbd/meerkat/wiki)
+更详细的文档说明请参见 [Wiki](https://github.com/ChanningBJ/meerkat/wiki)
 
 通过日志的方式查看监控结果
 ```
@@ -158,7 +158,7 @@ MeterCenter.INSTANCE
 #### 查看统计结果
 
 
-统计结果会以熔断命令类名为进行分组。例如前面我们定义的 GetPlayCountCommand 类,package name 是 com.qiyi.mbd.test，那么在日志中的输出将会是这个样子：
+统计结果会以熔断命令类名为进行分组。例如前面我们定义的 GetPlayCountCommand 类,package name 是 com.test，那么在日志中的输出将会是这个样子：
 
 ```
 type=GAUGE, name=com.test.GetPlayCountCommand.normal-rate, value=0.0
